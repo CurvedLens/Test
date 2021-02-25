@@ -93,6 +93,16 @@ double f(vector<vector<double> > a)
 		return 0;
 	}	
 }
+double f1(vector<vector<double> > a)
+{
+	if(a.size()==2)
+		return a[0][0]*a[0][0]+1000*a[1][0]*a[1][0]-2*a[0][0]*a[1][0]-10*a[0][0]+6004*a[1][0];
+	else
+	{
+		cout<<"Mistake"<<endl;
+		return 0;
+	}	
+}
 double test (vector<vector<double> > a)
 {
 	if(a.size()==2)
@@ -158,8 +168,6 @@ vector<vector<double> > Grad(vector<vector<double> > a,vector<vector<double> > b
 	double eps=0.0001;
 	double k=1,z=1;
 	int j=0;
-//	while(eps<=0)
-//	cin>>eps;
 	vector<vector<double> > temp(start.size(),vector<double>(1,-1));
 	cout<<"Starting position"<<endl;
 	Show(start);
@@ -195,7 +203,7 @@ vector<vector<double> > GradF(vector<vector<double> > a,vector<vector<double> > 
 	cout<<"Starting position"<<endl;
 	Show(start);
 	
-	while(  sqrt(k)>eps or z>eps)
+	while( sqrt(k)>eps or z>eps)
 	{
 		j++;
 		cout<<j<<". ";
@@ -297,42 +305,42 @@ vector<vector<double> > BetterGrad(vector<vector<double> > a,vector<vector<doubl
 
 int main()
 {
-	int o;
-	
 	vector<vector<double> > a(2,vector<double>(2,-0.01));
 	vector<vector<double> > b(2,vector<double>(1,1));
 	a[0][0]=6;
 	a[1][1]=4;
 	b[1][0]=-1;
 	
-	/*
-	vector<vector<double> > a(2,vector<double>(2,0.01));
-	vector<vector<double> > b(2,vector<double>(1,1));
-	a[0][0]=2;
-	a[1][1]=36;
-	b[1][0]=-1;
-	*/
-	vector<vector<double> > c3(2,vector<double>(1,1));
-	vector<vector<double> > c(2,vector<double>(1,10));
-	vector<vector<double> > c1(2,vector<double>(1,100));
-	vector<vector<double> > c2(2,vector<double>(1,100000));
+	vector<vector<double> > Sm(2,vector<double>(1,1));
+	vector<vector<double> > Big(2,vector<double>(1,10));
+	vector<vector<double> > La(2,vector<double>(1,100));
+	vector<vector<double> > En(2,vector<double>(1,100000));
 	vector<vector<double> > d(2,vector<double>(1,1));
 	cout<<"Grad"<<endl;
-	//Show(Grad(a,b,c3,f));
 	//Show(Grad(a,b,c,test,1));
-	Show(Grad(a,b,c3,f,1));
-	Show(GradF(a,b,c3,f,1));
-	Show(Grad(a,b,c,f,1));
-	Show(GradF(a,b,c,f,1));
-	Show(Grad(a,b,c1,f,1));
-	Show(GradF(a,b,c1,f,1));
-	Show(Grad(a,b,c2,f,1));
-	Show(GradF(a,b,c2,f,1));
-	
 
+	vector<vector<double> > a1(2,vector<double>(2,-2));
+	vector<vector<double> > b1(2,vector<double>(1,-10));
+	a1[0][0]=2;
+	a1[1][1]=2000;
+	b1[1][0]=6004;
+	//Show(GradF(a1,b1,Big,f1,0));
+	Show(Grad(a1,b1,La,f1,1));
+	
+	Show(Grad(a,b,Sm,f,1));
+	//Show(GradF(a,b,Sm,f,1));
+	Show(Grad(a,b,Big,f,1));
+	//Show(GradF(a,b,Big,f,1));
+	Show(Grad(a,b,La,f,1));
+	//Show(GradF(a,b,La,f,1));
+	Show(Grad(a,b,En,f,1));
+	//Show(GradF(a,b,En,f,1));
+	return 1;
+	
+}
+
+	
 	//cout<<"Newton"<<endl;
 	//Show(Newton(a,c,f));
 	//cout<<"BiGrad"<<endl;
 	//Show(BetterGrad(a,b,c,f));
-	return 1;
-}
